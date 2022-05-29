@@ -1,5 +1,6 @@
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
+const gracefulShutdown = require('http-graceful-shutdown');
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -71,6 +72,8 @@ app.get('/api/catalog/:id', express.json(), function (req, res) {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+gracefulShutdown(server);
