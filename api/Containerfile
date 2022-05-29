@@ -1,0 +1,20 @@
+# 16.15.0-alpine3.15
+FROM docker.io/library/node@sha256:bb776153f81d6e931211e3cadd7eef92c811e7086993b685d1f40242d486b9bb as builder
+
+WORKDIR /app
+
+COPY package.json \
+     yarn.lock ./
+RUN yarn install
+
+COPY index.js .
+
+
+# 16
+FROM gcr.io/distroless/nodejs@sha256:9e420e129e91a825998cc44b61c9bd60e6a21b97440513a84ee9714dd5129628
+
+WORKDIR /app
+
+COPY --from=builder /app /app
+
+CMD ["index.js"]
