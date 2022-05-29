@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "API",
+      "path": "api"
+    },
+    {
+      "name": "UI",
+      "path": "frontend"
+    },
+    {
+      "name": "Static files",
+      "path": "html"
+    }
+  ]
+}
