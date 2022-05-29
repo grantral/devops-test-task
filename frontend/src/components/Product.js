@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 async function getProduct(id) {
-  const response = await fetch(`${process.env.REACT_APP_API}/api/products/${id}`, {
+  const response = await fetch(`http://${process.env.REACT_APP_API}/api/products/${id}`, {
     headers: {
       'Content-Type': 'application/json'
     }
@@ -41,4 +41,3 @@ export default function Product() {
     </>
   );
 };
-
