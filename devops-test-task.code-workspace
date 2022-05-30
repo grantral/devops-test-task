@@ -9,8 +9,8 @@
       "path": "frontend"
     },
     {
-      "name": "Static files",
-      "path": "html"
+      "name": "Nginx",
+      "path": "nginx"
     }
   ]
 }
