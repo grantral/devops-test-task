@@ -1,7 +1,5 @@
 # 16.15.0-alpine3.15
-FROM docker.io/library/node@sha256:bb776153f81d6e931211e3cadd7eef92c811e7086993b685d1f40242d486b9bb as builder
-
-ARG REACT_APP_API
+FROM docker.io/library/node@sha256:bb776153f81d6e931211e3cadd7eef92c811e7086993b685d1f40242d486b9bb
 
 WORKDIR /app
 
@@ -11,16 +9,7 @@ RUN yarn install
 
 COPY public public
 COPY src src
-RUN yarn build
 
+ENV REACT_APP_API=localhost:9090
 
-# 16.15.0-alpine3.15
-FROM docker.io/library/node@sha256:bb776153f81d6e931211e3cadd7eef92c811e7086993b685d1f40242d486b9bb
-
-WORKDIR /app
-
-RUN yarn global add serve
-
-COPY --from=builder /app/build /app
-
-CMD serve
+CMD yarn start
