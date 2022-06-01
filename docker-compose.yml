@@ -7,12 +7,6 @@ services:
       dockerfile: Containerfile
     environment:
       PORT: 3000
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 1s
     networks:
       - services
     restart: unless-stopped
@@ -22,12 +16,6 @@ services:
       dockerfile: Containerfile
       args:
         REACT_APP_API: devops.ivolga.tech
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 1s
     networks:
       - services
     restart: unless-stopped
@@ -42,15 +30,9 @@ services:
         mode: host
     depends_on:
       backend:
-        condition: service_healthy
+        condition: service_started
       frontend:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 1s
+        condition: service_started
     networks:
       - services
       - nginx
