@@ -25,8 +25,8 @@ jobs:
           file: api/Containerfile
           push: true
           tags: |
-            ${{ github.repository }}/backend:latest
-            ${{ github.repository }}/backend:${{ github.ref_name }}
+            ghcr.io/${{ github.repository }}/backend:latest
+            ghcr.io/${{ github.repository }}/backend:${{ github.ref_name }}
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v3
@@ -35,8 +35,8 @@ jobs:
           file: frontend/Containerfile
           push: true
           tags: |
-            ${{ github.repository }}/frontend:latest
-            ${{ github.repository }}/frontend:${{ github.ref_name }}
+            ghcr.io/${{ github.repository }}/frontend:latest
+            ghcr.io/${{ github.repository }}/frontend:${{ github.ref_name }}
 
       - name: Build and push nginx image
         uses: docker/build-push-action@v3
@@ -45,5 +45,5 @@ jobs:
           file: nginx/Containerfile
           push: true
           tags: |
-            ${{ github.repository }}/nginx:latest
-            ${{ github.repository }}/nginx:${{ github.ref_name }}
+            ghcr.io/${{ github.repository }}/nginx:latest
+            ghcr.io/${{ github.repository }}/nginx:${{ github.ref_name }}
