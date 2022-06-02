@@ -1,0 +1,49 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push-image:
+    name: Build and push OCI image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v3
+        with:
+          context: api
+          file: Containerfile
+          push: true
+          tags: |
+            ${{ github.repository }}/backend:latest
+            ${{ github.repository }}/backend:${{ github.ref_name }}
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v3
+        with:
+          context: frontend
+          file: Containerfile
+          push: true
+          tags: |
+            ${{ github.repository }}/frontend:latest
+            ${{ github.repository }}/frontend:${{ github.ref_name }}
+
+      - name: Build and push nginx image
+        uses: docker/build-push-action@v3
+        with:
+          context: nginx
+          file: Containerfile
+          push: true
+          tags: |
+            ${{ github.repository }}/nginx:latest
+            ${{ github.repository }}/nginx:${{ github.ref_name }}
