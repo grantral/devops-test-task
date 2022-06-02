@@ -22,7 +22,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: api
-          file: Containerfile
+          file: api/Containerfile
           push: true
           tags: |
             ${{ github.repository }}/backend:latest
@@ -32,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: frontend
-          file: Containerfile
+          file: frontend/Containerfile
           push: true
           tags: |
             ${{ github.repository }}/frontend:latest
@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: nginx
-          file: Containerfile
+          file: nginx/Containerfile
           push: true
           tags: |
             ${{ github.repository }}/nginx:latest
