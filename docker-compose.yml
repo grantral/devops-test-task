@@ -13,7 +13,7 @@ services:
       context: frontend
       dockerfile: Containerfile
       args:
-        REACT_APP_API: devops.ivolga.tech
+        REACT_APP_API: devops.lvh.me
     restart: unless-stopped
   nginx:
     build:
