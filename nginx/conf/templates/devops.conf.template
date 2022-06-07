@@ -1,8 +1,8 @@
 server {
     listen      80;
     listen      [::]:80;
-    server_name devops.lvh.me;
-    root        /usr/share/nginx/devops.lvh.me;
+    server_name $APP_HOST;
+    root        /usr/share/nginx/$APP_HOST;
 
     include     nginxconfig.io/security.conf;
 
@@ -32,11 +32,11 @@ server {
 
     location /api {
         include    nginxconfig.io/proxy.conf;
-        proxy_pass http://localhost:$BACKEND_PORT;
+        proxy_pass http://$BACKEND_HOST:$BACKEND_PORT;
     }
 
     location @frontend {
         include    nginxconfig.io/proxy.conf;
-        proxy_pass http://localhost:$FRONTEND_PORT;
+        proxy_pass http://$FRONTEND_HOST:$FRONTEND_PORT;
     }
 }
