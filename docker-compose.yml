@@ -42,3 +42,16 @@ services:
         condition: service_started
     network_mode: host
     restart: unless-stopped
+  ngrok:
+    # 3.0.3-alpine
+    image: docker.io/ngrok/ngrok@sha256:f0817380a8b012b9ec20f6d61eb7d2f406a77bcf2793921129979ac6f3127a51
+    command: http --host-header $APP_HOST 80
+    environment:
+      NGROK_AUTHTOKEN: $NGROK_AUTHTOKEN
+    depends_on:
+      nginx:
+        condition: service_started
+    network_mode: host
+    profiles:
+      - ngrok
+    restart: unless-stopped
