@@ -1,9 +1,11 @@
-const express = require('express')
-const cors = require('cors')
-const app = express()
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const morgan = require('morgan');
 const gracefulShutdown = require('http-graceful-shutdown');
 
 app.use(cors());
+app.use(morgan(':remote-addr :req[X-Real-IP] :req[Forwarded] :req[X-Forwarded-For]'));
 
 const products = [{
   id: 1,
